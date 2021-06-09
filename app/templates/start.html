@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <header>
+        <title>Photo Manager</title> 
+        <script>
+            function delete_photo(me){
+                id = me.parentNode.getAttribute("id")
+                console.log(id)
+                if(id){
+                    window.location = "/delete/" + id;
+                }
+            }
+
+            function edit_photo(me) {
+                id = me.parentNode.getAttribute("id")
+                console.log(id)
+                if (id) {
+                    window.location = "/edit/" + id;
+                }
+            }
+        </script>
+    </header>
+    <head>
+        <link rel="icon" type="image/png" href= "{{ url_for('static', filename='favicon.ico') }}">
+    </head>
+    <body style="background-color: #f0f0f0;">
+        <h1>Photo Manager</h1>
+        <div style="margin: 10px;">
+            <h2>Available photos:</h2>
+            <ul>
+                {%for photo in photos %}
+                <li>
+                    <div id={{photo.id}} style="margin: 10px;">
+                        <button onclick="edit_photo(this)" >Edit</button>
+                        <button onclick="delete_photo(this)" >Delete</button> 
+                        <a href="/photo/{{photo.id}}" style="margin-left:10px;">{{photo.id}}) {{ photo.name }}</a>
+                    </div>
+                </li>
+            {% endfor %}
+            </ul>
+        
+            <h2>Upload new picture</h2>
+            <form action="/upload" enctype="multipart/form-data" method="POST">
+                <input type="file" name="picture" accept="image/png, image/jpg, image/jpeg"/>
+                <input type="submit" value="Upload"/>
+            </form>
+        </div>
+    </body>
+</html>
