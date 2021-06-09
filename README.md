@@ -10,7 +10,7 @@ pip install flask
 pip install -r /requirements.txt
 ```
 
-Then, simply launch the flask server running:
+Then, simply launch the flask server by running:
 ```python
 flask run
 ```
